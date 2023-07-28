@@ -10,6 +10,8 @@
  */
 
 function replace(str, url) {
+  var url_array = url.split("/")
+  str = str.replace(replace.slash_rx, '$1' + url_array[0] + url_array[2] + '/')
   if (typeof url === 'function') return replace.iterate(str, url)
   return str.replace(replace.rx, '$1' + url + '/$4')
 }
@@ -18,10 +20,14 @@ function replace(str, url) {
  * The magic, find all occurences of `attr="/`, ignoring any `//` found,
  * ensure that the leading `/` of the url is not captured
  *
- * HTML attribute list from: http://stackoverflow.com/questions/2725156/complete-list-of-html-tag-attributes-which-have-a-url-value
+ * HTML attribute list from: http://stackoverflow.com/questions/2725156/complete-list-of-html-tag-attributes-which-have-a-url-value  
  */
 
-replace.rx = /((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(([.]+\/)|(?:\/)|(?=#))(?!\/)/g
+replace.slash_rx = /((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(\/)/g
+// Handle paths at root of the current web
+// https://www.w3schools.com/Html/html_filepaths.asp  Example 3
+  
+replace.rx = /((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(([.]+\/)|(?=#))(?!\/)/g
 
 /*!
  * Match the same as above, but capture the full URL for iteration
