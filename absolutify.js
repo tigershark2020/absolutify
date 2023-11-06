@@ -11,7 +11,10 @@
 
 function replace(str, url) {
   var url_array = url.split("/")
-  str = str.replace(replace.slash_rx, url_array[0] + url_array[2] + '/')
+  if(url.startsWith("/"))
+  {
+    return str = str.replace(replace.slash_rx, url_array[0] + url_array[2] + '/')
+  }
   if (typeof url === 'function') return replace.iterate(str, url)
   return str.replace(replace.rx, '$1' + url + '/$4')
 }
