@@ -26,7 +26,7 @@ function replace(str, url) {
  * HTML attribute list from: http://stackoverflow.com/questions/2725156/complete-list-of-html-tag-attributes-which-have-a-url-value  
  */
 
-replace.slash_slash_rx = ((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(\/\/)
+replace.slash_slash_rx = /((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(\/\/)/g
 replace.slash_rx = /((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(\/)/g
 // Handle paths at root of the current web
 // https://www.w3schools.com/Html/html_filepaths.asp  Example 3
