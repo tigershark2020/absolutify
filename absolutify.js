@@ -12,7 +12,7 @@
 function replace(str, url) {
   var url_array = url.split("/")
   
-  str = str.replace(replace.slash_slash_rx, '$1'.replace('"//','"https://'))
+  str = str.replace(replace.slash_slash_rx, '$1' + 'https://')
   str = str.replace(replace.slash_rx, '$1')
 
   if (typeof url === 'function') return replace.iterate(str, url)
