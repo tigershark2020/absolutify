@@ -11,6 +11,8 @@
 
 function replace(str, url) {
   var url_array = url.split("/")
+  
+  str = str.replace(replace.slash_slash_rx, '$1'.substring(1,'$1'.indexOf('//') + 'https://' + url + '/$4')
   str = str.replace(replace.slash_rx, '$1')
 
   if (typeof url === 'function') return replace.iterate(str, url)
@@ -24,6 +26,7 @@ function replace(str, url) {
  * HTML attribute list from: http://stackoverflow.com/questions/2725156/complete-list-of-html-tag-attributes-which-have-a-url-value  
  */
 
+replace.slash_slash_rx = ((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(\/\/)
 replace.slash_rx = /((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(\/)/g
 // Handle paths at root of the current web
 // https://www.w3schools.com/Html/html_filepaths.asp  Example 3
